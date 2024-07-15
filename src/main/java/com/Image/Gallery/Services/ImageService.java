@@ -29,4 +29,8 @@ public class ImageService {
         return imageGalleryRepository.findById(id);
     }
 
+    public void updateImage(ImageGallery image) {
+        imageGalleryRepository.save(image);
+    }
+
 }

@@ -40,4 +40,10 @@ public class ImageController {
         return imageOptional.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @PutMapping(path = "/image/{id}")
+    public void updateImage(@RequestBody ImageGallery image, @PathVariable Long id){
+        image.setId(id);
+        imageService.updateImage(image);
+    }
 }
