@@ -28,23 +28,16 @@ public class ImageController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllImages() {
-        // Método original ajustado para utilizar el método del servicio
+    public ResponseEntity<List<ImageGallery>> getAllImages() {
         List<ImageGallery> images = imageService.getAllImages();
         return ResponseEntity.ok(images);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getImageById(@PathVariable Long id) {
-        // Método original ajustado para utilizar el método del servicio
+    public ResponseEntity<ImageGallery> getImageById(@PathVariable Long id) {
         Optional<ImageGallery> imageOptional = imageService.getImageById(id);
 
-        // Verifica si se encontró la imagen con el ID dado
-        if (imageOptional.isPresent()) {
-            return ResponseEntity.ok(imageOptional.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return imageOptional.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
-
 }
