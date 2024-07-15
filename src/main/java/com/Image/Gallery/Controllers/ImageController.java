@@ -1,14 +1,17 @@
-package com.example.imagegallery.controller;
+package com.image.gallery.controllers;
 
-import com.example.imagegallery.model.Image;
-import com.example.imagegallery.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.Image.Gallery.Models.ImageGallery;
+import com.Image.Gallery.Services.ImageService;
+
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/images")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class ImageController {
 
     private final ImageService imageService;
@@ -18,13 +21,10 @@ public class ImageController {
         this.imageService = imageService;
     }
 
-    @PostMapping("/add")
-    public void addImage(@RequestBody Image image) {
-        imageService.addImage(image);
+    @PostMapping
+    public ResponseEntity<ImageGallery> addImage(@RequestBody ImageGallery newImage) {
+        ImageGallery savedImage = imageService.saveImage(newImage);
+        return ResponseEntity.status(201).body(savedImage);
     }
 
-    @GetMapping("/list")
-    public List<Image> getAllImages() {
-        return imageService.getAllImages();
-    }
 }

@@ -1,20 +1,21 @@
-package com.example.imagegallery.service;
-package com.example.imagegallery.service;
+package com.Image.Gallery.Services;
 
-import com.imagegallery.model.Image;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+import com.Image.Gallery.Models.ImageGallery;
+import com.Image.Gallery.Repositories.ImageGalleryRepository;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ImageService {
-    private List<Image> gallery = new ArrayList<>();
 
-    public void addImage(Image image) {
-        gallery.add(image);
+    @Autowired
+    private ImageGalleryRepository imageGalleryRepository;
+
+    public ImageGallery saveImage(ImageGallery image) {
+        return imageGalleryRepository.save(image);
     }
 
-    public List<Image> getAllImages() {
-        return gallery;
-    }
 }
