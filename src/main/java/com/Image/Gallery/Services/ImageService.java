@@ -3,7 +3,7 @@ package com.Image.Gallery.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.Image.Gallery.Models.ImageGallery;
-import com.Image.Gallery.Repositories.ImageGalleryRepository;
+import com.Image.Gallery.Repositories.IimageGalleryRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class ImageService {
 
     @Autowired
-    private ImageGalleryRepository imageGalleryRepository;
+    private IimageGalleryRepository imageGalleryRepository;
 
     public ImageGallery saveImage(ImageGallery image) {
         return imageGalleryRepository.save(image);
