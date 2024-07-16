@@ -33,4 +33,14 @@ public class ImageService {
         imageGalleryRepository.save(image);
     }
 
+    public String deleteImage(Long id) {
+        try {
+            imageGalleryRepository.deleteById(id);
+        return "all good";
+    }catch (Exception error) {
+        return "all bad";  
+    }
+
+  }
+
 }

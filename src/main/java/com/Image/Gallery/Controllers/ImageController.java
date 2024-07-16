@@ -46,4 +46,13 @@ public class ImageController {
         image.setId(id);
         imageService.updateImage(image);
     }
+
+    
+@DeleteMapping(path = "image/{id}")
+public String deleteImage(@PathVariable("id")Long id) {
+		return imageService.deleteImage(id);
 }
+
+}
+
+
