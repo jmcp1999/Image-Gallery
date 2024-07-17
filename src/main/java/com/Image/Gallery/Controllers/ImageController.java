@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/images")
+@RequestMapping("/")
 @CrossOrigin(origins = "*")
 public class ImageController {
 
@@ -22,7 +22,7 @@ public class ImageController {
         this.imageService = imageService;
     }
 
-    @PostMapping
+    @PostMapping(path = "/images")
     @ResponseStatus(HttpStatus.CREATED)
     public ImageGallery addImage(@RequestBody ImageGallery newImage) {
         return imageService.saveImage(newImage);
