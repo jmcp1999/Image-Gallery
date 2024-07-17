@@ -11,7 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "image-gallery")
+@Table(name = "image_gallery")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,10 +22,10 @@ public class ImageGallery {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "url")
+    @Column(name = "url", nullable = false)
     private String url;
 
     @Column(name = "description")

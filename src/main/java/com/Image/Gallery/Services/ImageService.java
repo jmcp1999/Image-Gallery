@@ -30,17 +30,19 @@ public class ImageService {
     }
 
     public void updateImage(ImageGallery image) {
-        imageGalleryRepository.save(image);
+        if (imageGalleryRepository.existsById(image.getId())) {
+            imageGalleryRepository.save(image);
+        } else {
+            throw new RuntimeException("Image not found");
+        }
     }
 
     public String deleteImage(Long id) {
-        try {
+        if (imageGalleryRepository.existsById(id)) {
             imageGalleryRepository.deleteById(id);
-        return "all good";
-    }catch (Exception error) {
-        return "all bad";  
+            return "Image deleted successfully";
+        } else {
+            throw new RuntimeException("Image not found");
+        }
     }
-
-  }
-
 }
