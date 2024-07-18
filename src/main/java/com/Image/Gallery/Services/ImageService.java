@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.Image.Gallery.Models.ImageGallery;
 import com.Image.Gallery.Repositories.IimageGalleryRepository;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ImageService {
@@ -25,24 +25,27 @@ public class ImageService {
         return imageGalleryRepository.findAll();
     }
 
-    public Optional<ImageGallery> getImageById(Long id) {
-        return imageGalleryRepository.findById(id);
+    public ImageGallery getById(Long id){
+        ImageGallery imageGallery;
+        imageGallery = imageGalleryRepository.findById(id).orElseThrow();
+        return imageGallery;
+
     }
 
-    public void updateImage(ImageGallery image) {
-        if (imageGalleryRepository.existsById(image.getId())) {
-            imageGalleryRepository.save(image);
-        } else {
-            throw new RuntimeException("Image not found");
-        }
+    public void updateImage(ImageGallery images){
+        imageGalleryRepository.save(images);
     }
+    
 
-    public String deleteImage(Long id) {
-        if (imageGalleryRepository.existsById(id)) {
+    public String deleteImages(Long id){
+        try{
             imageGalleryRepository.deleteById(id);
-            return "Image deleted successfully";
-        } else {
-            throw new RuntimeException("Image not found");
+            return "todo ok";
+        }catch (Exception error){
+        return "todo mal";
+
         }
     }
+
 }
+    
