@@ -8,7 +8,6 @@ import com.Image.Gallery.Services.ImageService;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/")
@@ -28,26 +27,30 @@ public class ImageController {
         return imageService.saveImage(newImage);
     }
 
-    @GetMapping
+    @GetMapping(path = "/images")
     public List<ImageGallery> getAllImages() {
         return imageService.getAllImages();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path = "/images/{id}")
     public ImageGallery getImageById(@PathVariable Long id) {
         return imageService.getImageById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not found"));
     }
 
-    @PutMapping("/image/{id}")
+    @PutMapping(path = "/images/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateImage(@RequestBody ImageGallery image, @PathVariable Long id) {
         image.setId(id);
-        imageService.updateImage(image);
+        imageService.updateImage(image)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not found"));
     }
 
-    @DeleteMapping("/image/{id}")
-    public String deleteImage(@PathVariable Long id) {
-        return imageService.deleteImage(id);
+    @DeleteMapping(path = "/images/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteImage(@PathVariable Long id) {
+        if (!imageService.deleteImage(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not found");
+        }
     }
 }

@@ -37,7 +37,7 @@ public class ImageService {
         }
     }
 
-    public String deleteImage(Long id) {
+    public boolean deleteImage(Long id) {
         if (imageGalleryRepository.existsById(id)) {
             imageGalleryRepository.deleteById(id);
             return "Image deleted successfully";
