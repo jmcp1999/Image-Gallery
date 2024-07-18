@@ -48,10 +48,11 @@ public class ImageController {
     }
 
     
-@DeleteMapping(path = "image/{id}")
-public String deleteImage(@PathVariable("id")Long id) {
+    @DeleteMapping(path = "image/{id}")
+    public String deleteImage(@PathVariable("id")Long id) {
+
 		return imageService.deleteImage(id);
-}
+    }
 
 }
 
