@@ -1,7 +1,6 @@
 package com.Image.Gallery.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.Image.Gallery.Models.ImageGallery;
 import com.Image.Gallery.Services.ImageService;
@@ -23,7 +22,6 @@ public class ImageController {
     }
 
     @PostMapping(path = "/images")
-    @ResponseStatus(HttpStatus.CREATED)
     public ImageGallery addImage(@RequestBody ImageGallery newImage) {
         return imageService.saveImage(newImage);
     }
